@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>تولد یکسالگی روشناسادات</title>
+
+<style>
+body{
+  margin:0;
+  font-family:"Vazirmatn", sans-serif;
+  background:linear-gradient(#fde7ef,#fff);
+  text-align:center;
+  color:#6b2c3e;
+  overflow-x:hidden;
+}
+.container{
+  max-width:600px;
+  margin:auto;
+  padding:30px 15px;
+
+  /* 👇 اینا اضافه میشه */
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+@media (max-width: 600px){
+  .container{
+    padding:5px;
+  }
+}
+
+.card{
+  background:white;
+  border-radius:25px;
+  padding:25px;
+  box-shadow:0 12px 35px rgba(0,0,0,.12);
+	animation:zoomInCard .8s ease-out both;
+	animation-delay:.2s;
+}
+h1{font-size:26px;}
+h2{font-size:18px;font-weight:normal;}
+
+.photo img{
+  width:250px;
+  height:250px;
+  border-radius:50%;
+  object-fit:cover;
+  border:5px solid #f4b6c2;
+}
+
+.text,.info{
+  line-height:2;
+  font-size:17px;
+}
+
+.btn{
+  display:inline-block;
+  margin-top:20px;
+  padding:12px 22px;
+  background:#e2557f;
+  color:white;
+  border-radius:30px;
+  text-decoration:none;
+}
+
+.countdown{
+  margin-top:20px;
+  font-size:18px;
+  color:#e2557f;
+}
+
+/* لایه شروع */
+#startLayer{
+  position:fixed;
+  inset:0;
+  background:rgba(253,231,239,.95);
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  color:#e2557f;
+  cursor:pointer;
+}
+
+/* قلب و زر‌برق */
+.fall{
+  position:fixed;
+  top:-20px;
+  animation:fall linear forwards;
+  pointer-events:none;
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(110vh) rotate(360deg);
+    opacity:0;
+  }
+}
+	@keyframes zoomInCard{
+  0%{
+    transform:scale(.85);
+    opacity:0;
+  }
+  100%{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div id="startLayer">✨ لمس کنید ✨</div>
+
+<div class="container">
+  <div class="card">
+    <h1>🎀 تولد یکسالگی روشناسادات 🎀</h1>
+    <h2>فرشته‌ی کوچولوی زندگی ما</h2>
+
+    <div class="photo">
+      <img src="photo.png">
+    </div>
+
+    <div class="text">
+      یک سال از آمدنت گذشت…<br>
+یک سالی که خانه‌مان پر شد از نور،<br>
+دل‌هایمان از عشق،<br>
+و زندگی‌مان از معنای تازه.<br>
+با افتخار و عشق<br>
+شما را به جشن یکسالگی روشنای عزیزمان دعوت می‌کنیم  💕
+    </div><br>
+
+    <div class="info">
+      📅 ۱۱ دی ۱۴۰۴<br>
+      ⏰ ۱۵ تا ۱۸<br>
+      📍 عمارت کلیاس
+    </div>
+
+    <div class="countdown" id="countdown"></div>
+
+    <a class="btn"
+   href="https://nshn.ir/6brbH-Fc_GKPXg"
+   target="_blank">
+   📍 مسیر یابی
+</a>
+
+  </div>
+</div>
+
+<script>
+/* پخش موسیقی */
+const music = document.getElementById("bgMusic");
+const layer = document.getElementById("startLayer");
+
+layer.addEventListener("click", ()=>{
+  music.play();
+  layer.style.display="none";
+  startFalling();
+},{once:true});
+
+/* قلب و زر‌برق */
+function startFalling(){
+  setInterval(()=>{
+    const el = document.createElement("div");
+    el.className="fall";
+    el.innerHTML = Math.random() > 0.5 ? "❤️" : "✨";
+    el.style.left = Math.random()*100+"vw";
+    el.style.fontSize = (14+Math.random()*20)+"px";
+    el.style.animationDuration = (4+Math.random()*3)+"s";
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),7000);
+  },200);
+}
+
+/* شمارش معکوس */
+const eventDate = new Date("2025-12-31T15:00:00").getTime();
+const cd = document.getElementById("countdown");
+
+setInterval(()=>{
+  const d = eventDate - Date.now();
+  if(d<0){
+    cd.innerHTML="🎉 امروز جشن روشناساداته 🎉";
+    return;
+  }
+  const days=Math.floor(d/86400000);
+  const hours=Math.floor((d%86400000)/3600000);
+  const mins=Math.floor((d%3600000)/60000);
+  cd.innerHTML=`⏳ ${days} روز ${hours} ساعت ${mins} دقیقه`;
+},1000);
+</script>
+
+</body>
+</html>
